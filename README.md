@@ -24,9 +24,15 @@ groups of names for different types of vessel, etc, etc. I personally didn't nee
 and just wanted a quick and easy way of naming the vessel without any hassle, hence this mod.
 
 
+DEPENDENCIES
+
+ModuleManager by Sarbian and Blowfish (included)
+
+
 LICENCE
 
-MIT Licence
+MIT Licence (ORANGE)
+ModuleManager by Sarbian and Blowfish redistributed under Creative Commons CC-BY-NC-SA Licence.
 
 
 INSTALLATION
