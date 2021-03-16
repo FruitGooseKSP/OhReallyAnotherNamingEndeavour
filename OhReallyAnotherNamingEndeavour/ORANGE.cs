@@ -11,13 +11,6 @@ namespace OhReallyAnotherNamingEndeavour
 
     public class ORANGE : PartModule
     {
-        public TMPro.TMP_InputField shipNameBox;
-        public List<String> firstNames;
-        public List<String> secondNames;
-        public string pathToData;
-        public string pathToFirst;
-        public string pathToSecond;
-        public string chosenName;
 
         [KSPEvent(active = true, guiActiveEditor = true, guiName = "Change Name")]
         public void SetNewName()
@@ -26,20 +19,29 @@ namespace OhReallyAnotherNamingEndeavour
             shipNameBox.text = chosenName;
         }
 
-        public void Start() {
+        public TMPro.TMP_InputField shipNameBox;
+        public List<String> firstNames;
+        public List<String> secondNames;
+        public string pathToData;
+        public string pathToFirst;
+        public string pathToSecond;
+        public string chosenName;
 
-            shipNameBox = EditorLogic.fetch.shipNameField;
-            pathToData = KSPUtil.ApplicationRootPath + "/GameData/FruitKocktail/ORANGE/PluginData/";
-            pathToFirst = pathToData + "first.txt";
-            pathToSecond = pathToData + "second.txt";
-            firstNames = new List<String>(File.ReadAllLines(pathToFirst));
-            secondNames = new List<String>(File.ReadAllLines(pathToSecond));
-
-
+        public void Start() 
+        {
+            if (HighLogic.LoadedSceneIsEditor)
+            {
+                shipNameBox = EditorLogic.fetch.shipNameField;
+                pathToData = KSPUtil.ApplicationRootPath + "/GameData/FruitKocktail/ORANGE/PluginData/";
+                pathToFirst = pathToData + "first.txt";
+                pathToSecond = pathToData + "second.txt";
+                firstNames = new List<String>(File.ReadAllLines(pathToFirst));
+                secondNames = new List<String>(File.ReadAllLines(pathToSecond));
+            }
         }
 
-        private String SelectName() {
-
+        private String SelectName() 
+        {
             System.Random random = new System.Random();
             int firstNameIndex = random.Next(firstNames.Count);
             int secondNameIndex = random.Next(secondNames.Count);
@@ -47,13 +49,7 @@ namespace OhReallyAnotherNamingEndeavour
             string secondName = secondNames[secondNameIndex];
             string fullName = firstName + " " + secondName;
             return fullName;
-
-
         }
-
-       
-
-
 
     }
 }
