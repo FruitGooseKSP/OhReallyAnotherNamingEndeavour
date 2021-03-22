@@ -26,18 +26,13 @@ and just wanted a quick and easy way of naming the vessel without any hassle, he
 
 DEPENDENCIES
 
-ModuleManager by Sarbian and Blowfish (included)
+ModuleManager
 
 
 LICENCE
 
-MIT Licence (ORANGE)
-ModuleManager by Sarbian and Blowfish redistributed under Creative Commons CC-BY-NC-SA Licence.
+MIT Licence
 
-
-INSTALLATION
-
-Resides inside the GameData folder as normal.
 
 
 
