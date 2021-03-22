@@ -12,7 +12,7 @@ NOTES
   menu of the part labeled "Change Name". Just click this and the mod will automatically add a randomly 
   generated name into the Vessel's name box. Don't like the choice? Click again for another.
 - Names are generated from 2 x text files. You can add additional names/change etc if desired.
-- Never change the order or location of the files as they are hardcoded to be in the folders they are!
+
 
 
 FAQ
