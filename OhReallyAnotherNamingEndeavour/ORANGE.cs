@@ -11,19 +11,22 @@ namespace OhReallyAnotherNamingEndeavour
 
     public class ORANGE : PartModule
     {
-
+        // button to select name
         [KSPEvent(active = true, guiActiveEditor = true, guiName = "Change Name")]
         public void SetNewName()
         {
-            chosenName = SelectName();
+            if (!pathErrorsDetected)
+            {
+                chosenName = SelectName();
 
-            if (chosenName != null)
-            {
-                shipNameBox.text = chosenName;
-            }
-            else
-            {
-                Debug.LogError("ORANGE: unable to select a name!");
+                if (chosenName != null)
+                {
+                    shipNameBox.text = chosenName;
+                }
+                else
+                {
+                    Debug.LogError("ORANGE: unable to select a name!");
+                }
             }
         }
 
@@ -34,17 +37,51 @@ namespace OhReallyAnotherNamingEndeavour
         public string pathToFirst;
         public string pathToSecond;
         public string chosenName;
+        public bool pathErrorsDetected;
 
         public void Start() 
         {
             if (HighLogic.LoadedSceneIsEditor)
             {
+                pathErrorsDetected = false;
                 shipNameBox = EditorLogic.fetch.shipNameField;
                 pathToData = KSPUtil.ApplicationRootPath + "/GameData/FruitKocktail/ORANGE/PluginData/";
-                pathToFirst = pathToData + "first.txt";
-                pathToSecond = pathToData + "second.txt";
-                firstNames = new List<String>(File.ReadAllLines(pathToFirst));
-                secondNames = new List<String>(File.ReadAllLines(pathToSecond));
+
+                if (!Directory.Exists(pathToData))
+                {
+                    pathErrorsDetected = true;
+                    Debug.LogError("ERROR: ORANGE - required path to PluginData does not exist (/GameData/FruitKocktail/ORANGE/PluginData/). " +
+                        "Please check installation. ORANGE IS NOW DISABLED!");
+                }
+                else
+                {
+                    pathToFirst = pathToData + "first.txt";
+                    pathToSecond = pathToData + "second.txt";
+
+                    if (!File.Exists(pathToFirst))
+                    {
+                        pathErrorsDetected = true;
+                        Debug.LogError("ERROR: ORANGE - required file does not exist (first.txt). " +
+                        "Please check installation. ORANGE IS NOW DISABLED!");
+                    }
+                    if (!File.Exists(pathToSecond))
+                    {
+                        Debug.Log("Log: ORANGE - second.txt does not exist.");
+                    }
+
+                }
+                    
+                if (!pathErrorsDetected)
+                {
+                    firstNames = new List<String>(File.ReadAllLines(pathToFirst));
+
+                    if (File.Exists(pathToSecond))
+                    {
+                        secondNames = new List<String>(File.ReadAllLines(pathToSecond));
+                    }
+                } 
+                    
+                    
             }
         }
 
@@ -81,12 +118,6 @@ namespace OhReallyAnotherNamingEndeavour
                 Debug.LogError("ORANGE: Cannot read from lists, please ensure they exist!");
                 return null;
             }
-
-
-
-            
-
-
             
         }
 
